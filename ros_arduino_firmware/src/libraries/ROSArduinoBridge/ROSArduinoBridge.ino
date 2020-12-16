@@ -51,23 +51,29 @@
 /* Define the motor controller and encoder library you are using */
 #ifdef USE_BASE
    /* The Pololu VNH5019 dual motor driver shield */
-   #define POLOLU_VNH5019
+   //#define POLOLU_VNH5019
 
    /* The Pololu MC33926 dual motor driver shield */
    //#define POLOLU_MC33926
 
    /* The RoboGaia encoder shield */
-   #define ROBOGAIA
+   //#define ROBOGAIA
    
    /* Encoders directly attached to Arduino board */
    //#define ARDUINO_ENC_COUNTER
 
    /* L298 Motor driver*/
    //#define L298_MOTOR_DRIVER
+
+   /* Sabertooth SimpleSerial motor controller */
+   #define SABERTOOTH_MOTOR_DRIVER
+
+   /* Optical encoders connected to the Teensy interrupts */
+   #define TEENSY_OPTICAL_ENCODERS
 #endif
 
-#define USE_SERVOS  // Enable use of PWM servos as defined in servos.h
-//#undef USE_SERVOS     // Disable use of PWM servos
+//#define USE_SERVOS  // Enable use of PWM servos as defined in servos.h
+#undef USE_SERVOS     // Disable use of PWM servos
 
 /* Serial port baud rate */
 #define BAUDRATE     57600
@@ -114,7 +120,7 @@
 
   /* Stop the robot if it hasn't received a movement command
    in this number of milliseconds */
-  #define AUTO_STOP_INTERVAL 2000
+  #define AUTO_STOP_INTERVAL 1000
   long lastMotorCommand = AUTO_STOP_INTERVAL;
 #endif
 
@@ -268,6 +274,10 @@ void setup() {
   resetPID();
 #endif
 
+#ifdef TEENSY_OPTICAL_ENCODERS
+  initEncoders();
+#endif
+
 /* Attach servos if used */
   #ifdef USE_SERVOS
     int i;
@@ -347,4 +357,3 @@ void loop() {
   }
 #endif
 }
-

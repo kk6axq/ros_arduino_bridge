@@ -86,6 +86,34 @@
     setMotorSpeed(LEFT, leftSpeed);
     setMotorSpeed(RIGHT, rightSpeed);
   }
+#elif defined SABERTOOTH_MOTOR_DRIVER
+  void initMotorController() {
+    Serial3.begin(9600);
+  }
+  
+  void setMotorSpeed(int i, int spd) {
+    if (spd > 255)
+      spd = 255;
+    if (spd < -255)
+      spd = -255;
+      
+    if (i == LEFT) { 
+      //Left is motor A
+      Serial3.write(map(spd, -255, 255), LEFT_LOW, LEFT_HIGH);
+    }
+    else /*if (i == RIGHT) //no need for condition*/ {
+      Serial3.write(map(spd, -255, 255), RIGHT_LOW, RIGHT_HIGH);
+    }
+  }
+  
+  void setMotorSpeeds(int leftSpeed, int rightSpeed) {
+    if(leftSpeed == 0 && rightSpeed == 0){
+      Serial3.write(MOTOR_STOP);
+    }else{
+      setMotorSpeed(LEFT, leftSpeed);
+      setMotorSpeed(RIGHT, rightSpeed);
+    }
+  }
 #else
   #error A motor driver must be selected!
 #endif
