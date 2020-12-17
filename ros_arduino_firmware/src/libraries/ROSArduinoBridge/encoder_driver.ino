@@ -68,7 +68,7 @@
       return;
     }
   }
-#ifdef TEENSY_OPTICAL_ENCODERS
+#elif defined(TEENSY_OPTICAL_ENCODERS)
   volatile long encoder_1_count = 0;
   volatile long encoder_2_count = 0;
   
