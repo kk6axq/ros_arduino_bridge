@@ -81,7 +81,7 @@
                                      INVALID, -1, 1, 0
                                     };
   
-  void initializeEncoders() {
+  void initEncoders() {
     //Set input pins for encoder 1
     pinMode(ENCODER_1_PIN_A, INPUT_PULLUP);
     pinMode(ENCODER_1_PIN_B, INPUT_PULLUP);
@@ -96,7 +96,7 @@
   
     //Attach interrupts to the ISR
     attachInterrupt(ENCODER_2_PIN_A, encoder_2_ISR, CHANGE);
-    attachInterrupt(ENCODER_2_PIN_B, encoder_2_IDR, CHANGE);
+    attachInterrupt(ENCODER_2_PIN_B, encoder_2_ISR, CHANGE);
   }
 
   /**

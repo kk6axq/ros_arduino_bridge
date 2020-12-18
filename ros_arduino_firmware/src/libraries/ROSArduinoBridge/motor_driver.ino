@@ -99,10 +99,10 @@
       
     if (i == LEFT) { 
       //Left is motor A
-      Serial3.write(map(spd, -255, 255), LEFT_LOW, LEFT_HIGH);
+      Serial3.write(map(spd, -255, 255, LEFT_LOW, LEFT_HIGH));
     }
     else /*if (i == RIGHT) //no need for condition*/ {
-      Serial3.write(map(spd, -255, 255), RIGHT_LOW, RIGHT_HIGH);
+      Serial3.write(map(spd, -255, 255, RIGHT_LOW, RIGHT_HIGH));
     }
   }
   

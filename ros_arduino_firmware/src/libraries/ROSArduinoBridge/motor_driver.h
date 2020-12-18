@@ -18,7 +18,7 @@
   #define RIGHT_LOW 128
   #define RIGHT_HIGH 255
   #define MOTOR_STOP 0x00
-
+#endif
 void initMotorController();
 void setMotorSpeed(int i, int spd);
 void setMotorSpeeds(int leftSpeed, int rightSpeed);
